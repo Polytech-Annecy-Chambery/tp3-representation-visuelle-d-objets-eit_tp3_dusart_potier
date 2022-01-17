@@ -16,7 +16,7 @@ import copy
 
 
 def Q1a():
-    pass
+    return Configuration()
     
 def Q1b_f():
     return Configuration({'screenPosition': -5, 'xAxisColor': [1, 1, 0]}). \
@@ -37,14 +37,16 @@ def Q2c():
             )
 
 def Q3a():
-    pass  
+    return Configuration().add(
+            Wall({'position':[1,1,0],'width':7,'height':2.6,'edges':True})
+            )  
 
 def Q4a():
     # Ecriture en utilisant des variables : A compléter
-    wall1 = Wall(...)
-    wall2 = Wall(...)
-    wall3 = Wall(...)
-    wall4 = Wall(...)  
+    wall1 = Wall({'position':[0,2.8,0],'width':7,'height':2.6,'edges':True})
+    wall2 = Wall({'position':[0,0,0],'width':7,'height':2.6,'edges':True})
+    wall3 = Wall({'position':[0,0,0],'width':3,'height':2.6,'edges':True,'orientation':90})
+    wall4 = Wall({'position':[0,-7,0],'width':3,'height':2.6,'edges':True,'orientation':90})  
     house = House({'position': [-3, 1, 0], 'orientation':0})
     house.add(wall1).add(wall3).add(wall4).add(wall2)
     return Configuration().add(house)   
@@ -70,7 +72,7 @@ def Q5b():
 def Q5c1():      
     section = Section({'width':7, 'height':2.6})
     opening1 = Opening({'position': [2, 0, 0], 'width':0.9, 'height':2.15, 'thickness':0.2, 'color': [0.7, 0.7, 0.7]})
-    sections = section.createOpening(opening1)
+    sections =  section.createNewSections(opening1)
     configuration = Configuration()
     for x in sections:
         configuration.add(x)    
@@ -86,7 +88,17 @@ def Q5c2():
     return configuration    
 
 def Q5d():      
-    pass
+    wall1 = Wall({'position': [0, 0, 0],'width': 7,
+                  'height': 2.6,'orientation': 0,'edges': True})  
+    opening1 = Opening({'position': [2, 0, 0],'width': 0.9,
+                        'height': 2.15,'thickness': 0.2,'color': [0.7, 0.7, 0.7]})
+    opening2 = Opening({'position': [4, 0, 1.2],'width': 1.25,
+                        'height': 1,'thickness': 0.2,'color': [0.7, 0.7, 0.7]})
+    wall1.add(opening1)
+    wall1.add(opening2)
+    configuration=Configuration()
+    configuration.add(wall1)
+    return configuration
     
 def Q6():  
     pass  
@@ -94,7 +106,7 @@ def Q6():
 def main():
     # Enlever un des commentaires pour la question traitée
     
-    configuration = Q1a()
+    # configuration = Q1a()
     # configuration = Q1b_f()
     # configuration = Q2b()
     # configuration = Q2c()
@@ -104,10 +116,11 @@ def main():
     # configuration = Q5b()
     # configuration = Q5c1()
     # configuration = Q5c2() 
-    # configuration = Q5d()
+    configuration = Q5d()
     # configuration = Q6()
-    configuration.display()     
-         
+    configuration.display()
+    
+    
 # Calls the main function
 if __name__ == "__main__":
     main()    
